@@ -1,0 +1,20 @@
+
+services:
+  #specify the container we want to run
+  reservations:
+    build:
+        #where we want to run the Docker build from
+      context: .
+        #Specify the dockerfile path
+      dockerfile: ./apps/reservations/Dockerfile
+      target: development
+    #use to overwrite the command CMD inside the Dockerfile - remember to specify the app
+    command: pnpm run start:dev reservations
+    #specify port to connect
+    ports:
+      - '3000:3000'
+    #mounts whole project to the absolute usr/src/app directory
+    volumes:
+      - .:/usr/src/app
+  mongo:
+    image: mongo
