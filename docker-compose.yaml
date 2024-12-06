@@ -10,10 +10,24 @@ services:
       target: development
     #use to overwrite the command CMD inside the Dockerfile - remember to specify the app
     command: pnpm run start:dev reservations
+    env_file:
+      - ./apps/reservations/.env
     #specify port to connect
     ports:
       - '3000:3000'
     #mounts whole project to the absolute usr/src/app directory
+    volumes:
+      - .:/usr/src/app
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+      target: development
+    command: pnpm run start:dev auth
+    env_file:
+      - ./apps/auth/.env
+    ports:
+      - '3001:3001'
     volumes:
       - .:/usr/src/app
   mongo:
