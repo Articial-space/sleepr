@@ -20,6 +20,7 @@ import { UsersRepository } from './users.repository';
     }
   )],
   controllers: [UsersController],
-  providers: [UsersService, UsersRepository]
+  providers: [UsersService, UsersRepository],
+  exports: [UsersService]
 })
 export class UsersModule {}
