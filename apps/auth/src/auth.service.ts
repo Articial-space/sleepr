@@ -9,6 +9,7 @@ import { TokenPayload } from './interfaces/token-payload.interface';
 export class AuthService {
   constructor (private readonly configService: ConfigService, private readonly jwtService: JwtService) {}
   async login(user: UsersDocument, response: Response) {
+    console.log('my data saved')
     const tokenPayload: TokenPayload = {
       userId: user._id.toHexString()
 

@@ -10,7 +10,7 @@ import { TokenPayload } from "../interfaces/token-payload.interface";
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(configService: ConfigService, private readonly usersService: UsersService) {
-        super({jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => request?.cookies?.Authentication]),
+        super({jwtFromRequest: ExtractJwt.fromExtractors([(request: any) => request?.cookies?.Authentication || request?.Authentication]), // As the JWT will pass a straight authentication method not pass in via the cookie obj so we ckeck the request if it has Authentication prop 
             secretOrKey: configService.get('JWT_SECRET')
         }) // Specify where on the request on the request obj does the jwt live
     }
