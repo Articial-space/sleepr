@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
-import { map, Observable, tap } from "rxjs";
+import { catchError, map, Observable, of, tap } from "rxjs";
 import { AUTH_SERVICE } from "../constants/services";
 import { ClientProxy } from "@nestjs/microservices";
 import { UserDto } from "../dto";
@@ -19,9 +19,15 @@ export class JwtAuthGuard implements CanActivate {
             tap((res) => {
                 context.switchToHttp().getRequest().user = res
             }),
-            map(() => true) // return true to auth service via the message pattern that the request is authenticated
+            map(() => true), // return true to auth service via the message pattern that the request is authenticated
             // tap() allows to alter side effect on the response
-            
+            catchError(() => of(false))
         )
     }
 }
+
+// Purpose of of(false)
+// The of(false) is used in the catchError operator to handle errors.If any error occurs while processing the authClient.send() observable(e.g., if the authenticate message pattern fails or the JWT is invalid), the catchError will:
+// Stop the current observable chain.
+// Emit false to indicate that the guard should deny access to the protected route.
+// Complete the observable, signaling no further emissions.

@@ -9,12 +9,6 @@ export class CreateReservationDto {
     @IsDate()
     @Type(() => Date)
     endDate: Date
-    @IsString()
-    @IsNotEmpty()
-    placeId: String
-    @IsString()
-    @IsNotEmpty()
-    invoiceId: String
     @IsDefined()
     @IsNotEmptyObject()
     @ValidateNested()
