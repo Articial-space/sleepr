@@ -7,6 +7,7 @@ WORKDIR /usr/src/app
 #COPY package.json into the working directory
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY tsconfig.json tsconfig.json
 
 #install pnpm globally
 RUN npm install -g pnpm
@@ -15,7 +16,9 @@ RUN pnpm install
 
 #COPY a whole source code into the root of our Docker container
 # COPY <source> <destination>
-COPY . .
+# COPY . .
+COPY apps/reservations apps/reservations
+COPY libs libs
 
 RUN pnpm run build
 

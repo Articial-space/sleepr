@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { GetUserDto } from './dto/get-user.dto';
 import { currentUser } from '@app/common';
-import { UsersDocument } from './models/users.schema';
+import { UsersDocument } from '@app/common';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
 @Controller('users')

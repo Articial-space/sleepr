@@ -7,15 +7,21 @@ WORKDIR /usr/src/app
 #COPY package.json into the working directory
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY tsconfig.json tsconfig.json
 
 #install pnpm globally
 RUN npm install -g pnpm
 #It will install all dependencies from the package.json 
 RUN pnpm install
 
+COPY apps/notifications apps/notifications
+COPY libs libs
+
+RUN cd apps/notifications && pnpm install
+
 #COPY a whole source code into the root of our Docker container
 # COPY <source> <destination>
-COPY . .
+# COPY . .
 
 RUN pnpm run build
 

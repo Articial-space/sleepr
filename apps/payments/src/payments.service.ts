@@ -9,7 +9,7 @@ import { PaymentsCreateChargeDto } from '../dto/payments-create-charge.dto';
 export class PaymentsService {
     constructor(private readonly configService: ConfigService, @Inject(NOTIFICATIONS_SERVICE) private readonly notificationsService: ClientProxy) {}
     private readonly stripe = new Stripe(this.configService.get('STRIPE_SECRET_KEY'), {
-        apiVersion: "2025-01-27.acacia"
+        apiVersion: "2025-02-24.acacia"
     })
 
     async createCharge({card, amount, email}: PaymentsCreateChargeDto) {
