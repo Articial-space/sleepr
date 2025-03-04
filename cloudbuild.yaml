@@ -10,6 +10,8 @@ steps:
       'apps/reservations/Dockerfile',
       '.' #the build context will be at the root of directory
     ]
+    options:
+      defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
   #Deploy
   - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
     args: 
@@ -25,6 +27,8 @@ steps:
       'apps/auth/Dockerfile',
       '.' #the build context will be at the root of directory
     ]
+    options:
+      defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
   #Deploy
   - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
     args: 
@@ -40,6 +44,8 @@ steps:
       'apps/payments/Dockerfile',
       '.' #the build context will be at the root of directory
     ]
+    options:
+      defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
   #Deploy
   - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
     args: 
@@ -55,6 +61,8 @@ steps:
       'apps/notifications/Dockerfile',
       '.' #the build context will be at the root of directory
     ]
+    options:
+      defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
   #Deploy
   - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
     args: 
