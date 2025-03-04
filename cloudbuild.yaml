@@ -1,0 +1,61 @@
+steps:
+  #name is the builder name
+  #Reservations
+  - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
+    args: [
+      'build', #Run docker build command
+      '-t', #command for tag
+      'asia-southeast1-docker.pkg.dev/sleepr-450316/reservations/production', #URL of the server repository in the Gcloud with the /production image
+      '-f', #path to Dockerfile in the gcloud Docker
+      'apps/reservations/Dockerfile',
+      '.' #the build context will be at the root of directory
+    ]
+  #Deploy
+  - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
+    args: 
+      ['push', 'asia-southeast1-docker.pkg.dev/sleepr-450316/reservations/production'] #push the Dockerfile up to gcloud
+
+    #Auth
+  - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
+    args: [
+      'build', #Run docker build command
+      '-t', #command for tag
+      'asia-southeast1-docker.pkg.dev/sleepr-450316/auth/production', #URL of the server repository in the Gcloud with the /production image
+      '-f', #path to Dockerfile in the gcloud Docker
+      'apps/auth/Dockerfile',
+      '.' #the build context will be at the root of directory
+    ]
+  #Deploy
+  - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
+    args: 
+      ['push', 'asia-southeast1-docker.pkg.dev/sleepr-450316/auth/production'] #push the Dockerfile up to gcloud
+
+    #Payments
+  - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
+    args: [
+      'build', #Run docker build command
+      '-t', #command for tag
+      'asia-southeast1-docker.pkg.dev/sleepr-450316/payments/production', #URL of the server repository in the Gcloud with the /production image
+      '-f', #path to Dockerfile in the gcloud Docker
+      'apps/payments/Dockerfile',
+      '.' #the build context will be at the root of directory
+    ]
+  #Deploy
+  - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
+    args: 
+      ['push', 'asia-southeast1-docker.pkg.dev/sleepr-450316/payments/production'] #push the Dockerfile up to gcloud
+
+    #Notifications
+  - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
+    args: [
+      'build', #Run docker build command
+      '-t', #command for tag
+      'asia-southeast1-docker.pkg.dev/sleepr-450316/notifications/production', #URL of the server repository in the Gcloud with the /production image
+      '-f', #path to Dockerfile in the gcloud Docker
+      'apps/notifications/Dockerfile',
+      '.' #the build context will be at the root of directory
+    ]
+  #Deploy
+  - name: 'gcr.io/cloud-builders/docker' #this is the pre-build container that allows us to build, tag and push Dockerfile directly into gcloud(provided by gcloud)
+    args: 
+      ['push', 'asia-southeast1-docker.pkg.dev/sleepr-450316/notifications/production'] #push the Dockerfile up to gcloud
