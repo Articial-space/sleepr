@@ -17,10 +17,9 @@ RUN pnpm install
 
 #COPY a whole source code into the root of our Docker container
 # COPY <source> <destination>
-COPY apps/auth apps/auth
+# COPY . .
+COPY apps/reservations apps/reservations
 COPY libs libs
-
-RUN cd apps/auth && pnpm install
 
 RUN pnpm run build
 

@@ -10,6 +10,7 @@ COPY pnpm-lock.yaml ./
 COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
 
+
 #install pnpm globally
 RUN npm install -g pnpm
 #It will install all dependencies from the package.json 
@@ -17,10 +18,9 @@ RUN pnpm install
 
 #COPY a whole source code into the root of our Docker container
 # COPY <source> <destination>
+# COPY . .
 COPY apps/payments apps/payments
 COPY libs libs
-
-RUN cd apps/payments && pnpm install
 
 RUN pnpm run build
 
