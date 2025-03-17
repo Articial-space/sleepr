@@ -22,12 +22,12 @@ RUN npm install -g pnpm
 
 RUN pnpm install
 
-COPY apps/auth apps/auth
+COPY apps/payments apps/payments
 COPY libs libs
 
-RUN cd apps/auth && pnpm install
+RUN cd apps/payments && pnpm install
 
-RUN pnpm run build auth
+RUN pnpm run build payments
 
 FROM node:alpine AS production
 

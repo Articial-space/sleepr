@@ -24,7 +24,7 @@ spec:
           value: 34544592006-2tcasls09ju2rh67pj73hgbpbocddosf.apps.googleusercontent.com
         - name: SMTP_USER
           value: kevinkhoa0203@gmail.com
-        - name: GOOGLE_OAUTH-CLIENT_SECRET
+        - name: GOOGLE_OAUTH_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
               name: google
