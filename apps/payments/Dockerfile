@@ -12,17 +12,22 @@ COPY nest-cli.json nest-cli.json
 
 
 #install pnpm globally
+COPY package.json ./
+COPY pnpm-lock.yaml ./
+COPY tsconfig.json tsconfig.json
+COPY nest-cli.json nest-cli.json
+
+#install pnpm globally
 RUN npm install -g pnpm
-#It will install all dependencies from the package.json 
+
 RUN pnpm install
 
-#COPY a whole source code into the root of our Docker container
-# COPY <source> <destination>
-# COPY . .
-COPY apps/payments apps/payments
+COPY apps/auth apps/auth
 COPY libs libs
 
-RUN pnpm run build
+RUN cd apps/auth && pnpm install
+
+RUN pnpm run build auth
 
 FROM node:alpine AS production
 
