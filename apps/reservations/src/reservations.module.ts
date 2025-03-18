@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
-import { DatabaseModule, PAYMENTS_SERVICE } from '@app/common';
+import { DatabaseModule, HealthModule, PAYMENTS_SERVICE } from '@app/common';
 import { ReservationsRepository } from './reservations.repository';
 import { ReservationDocument, ReservationSchema } from './models/reservation.schema';
 import { LoggerModule } from 'nestjs-pino';
@@ -59,6 +59,7 @@ import { AUTH_SERVICE } from '@app/common';
     }
   ]), // we need to register the auth service so that the reservation can recognize it
   // We also have to specify the TCP port in order to create a connection with the auth at TCP port
+  HealthModule
 ],
   controllers: [ReservationsController],
   providers: [ReservationsService, ReservationsRepository],
